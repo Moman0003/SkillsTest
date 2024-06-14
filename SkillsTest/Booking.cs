@@ -8,6 +8,7 @@ public class Booking
     public DateTime End { get; set; }
     public int Participants { get; set; }
     
+    
     //Contructor
     public Booking(int id, DateTime start, DateTime end, int participants)
     {
@@ -17,9 +18,29 @@ public class Booking
         Participants = participants;
     }
     
+    
+    //BookingDuration
+    public bool BookingDurationOK
+    {
+        get
+        {
+            return Start.AddHours(2) >= End;
+        }
+    }
+
+    public bool IsSundayBooking
+    {
+        get
+        {
+            return Start.DayOfWeek == DayOfWeek.Sunday;
+        }
+    }
+    
+    
+    
     //ToString Method
     public override string ToString()
     {
-        return $"Booking ID: {ID}, Start:{Start}, End: {End}, Participants:{Participants}";
+        return $"Booking ID: {ID}, Start:{Start}, End: {End}, Participants:{Participants}, DurationOK:{BookingDurationOK}, Is Sunday:{IsSundayBooking}";
     }
 }
