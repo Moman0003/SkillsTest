@@ -12,3 +12,4 @@
 /Users/momans/RiderProjects/SkillsTest/SkillsTest/obj/Debug/net8.0/SkillsTest.pdb
 /Users/momans/RiderProjects/SkillsTest/SkillsTest/obj/Debug/net8.0/SkillsTest.genruntimeconfig.cache
 /Users/momans/RiderProjects/SkillsTest/SkillsTest/obj/Debug/net8.0/ref/SkillsTest.dll
+/Users/momans/RiderProjects/SkillsTest/SkillsTest/obj/Debug/net8.0/SkillsTest.sourcelink.json

@@ -8,7 +8,7 @@ class Program
         Booking booking2 = new Booking(2, new DateTime(2024, 6, 22, 14, 00, 00), new DateTime(2024, 6, 22, 16,00,00),15);
         Booking booking3 = new Booking(3, new DateTime(2024, 6, 23, 14, 00, 00), new DateTime(2024, 6, 23, 16,00,00),20);
 
-        Gymhall gymhall1 = new Gymhall(101, "Den lille gymnastiksal", "vejeksempel 1, 2860 søborg", "+45 XX XX XX XX",
+        Gymhall gymhall1 = new Gymhall(10101, "Den lille gymnastiksal", "vejeksempel 1, 2860 søborg", "+45 XX XX XX XX",
             "john@doe.com");
         
         Gymhall gymhall2 = new Gymhall(102, "Den store gymnastiksal", "vejeksempel 1, 2860 søborg", "+45 XX XX XX XX",
