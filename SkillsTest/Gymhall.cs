@@ -26,7 +26,7 @@ public class Gymhall
     //ToString Method
     public override string ToString()
     {
-        return $"ID:{ID}, Name:{Name}, Addresse:{Address}, Phone:{Phone},E-mail:{Email}, Total Bookings: {Totalbooking}, Is Valid:{Validate()}";
+        return $"ID:{ID}, Name:{Name}, Addresse:{Address}, Phone:{Phone},E-mail:{Email}, Total Bookings: {Totalbooking}";
     }
     
     
@@ -75,32 +75,77 @@ public class Gymhall
         }
     }
 
-    public bool Validate()
+   // New method: Add a booking with validation
+    public void AddBooking(int bookingId, DateTime startTime, DateTime endTime, int participants)
     {
-        bool isValid = true;
+        try
+        {
+            Booking newBooking = new Booking(bookingId, startTime, endTime, participants);
+            ValidateBooking(newBooking); // Validate the new booking
+            RegisterBooking(newBooking); // Register the new booking if validation passes
+        }
+        catch (BookingValidationException ex)
+        {
+            Console.WriteLine($"Error adding booking: {ex.Message}");
+        }
+    }
 
+    // Existing method: Validate all bookings
+    public void Validate()
+    {
         foreach (var booking in bookings.Values)
         {
             if (booking.End < booking.Start)
             {
-                Console.WriteLine($"Error: Booking ID {booking.ID} has End time before Start time. End time {booking.End} is before Start time {booking.Start}.");
-                isValid = false;
+                string message = $"Error: Booking ID {booking.ID} has End time before Start time. Booking ID {booking.End} is before {booking.Start}.";
+                throw new BookingValidationException(message);
             }
-        
+
             if (!booking.BookingDurationOK)
             {
-                Console.WriteLine($"Error: Booking ID {booking.ID} is more than 2 hours. There is more than 2 hours between {booking.Start} and {booking.End}.");
-                isValid = false;
+                string message = $"Error: Booking ID {booking.ID} is more than 2 hours. There is more than 2 hours between {booking.Start} and {booking.End}.";
+                throw new BookingValidationException(message);
             }
 
             if (booking.Participants > 22)
             {
-                Console.WriteLine($"Error: Booking ID {booking.ID} has more than 22 participants. Booking ID {booking.ID} has {booking.Participants} participants.");
-                isValid = false;
+                string message = $"Error: Booking ID {booking.ID} has more than 22 participants. Booking ID {booking.ID} has {booking.Participants} participants.";
+                throw new BookingValidationException(message);
             }
         }
+    }
 
-        return isValid;
+    // New method: Validate a single booking
+    private void ValidateBooking(Booking booking)
+    {
+        if (booking.End < booking.Start)
+        {
+            string message = $"Error: Booking ID {booking.ID} has End time before Start time. Booking ID {booking.End} is before {booking.Start}.";
+            throw new BookingValidationException(message);
+        }
+
+        if (!booking.BookingDurationOK)
+        {
+            string message = $"Error: Booking ID {booking.ID} is more than 2 hours. There is more than 2 hours between {booking.Start} and {booking.End}.";
+            throw new BookingValidationException(message);
+        }
+
+        if (booking.Participants > 22)
+        {
+            string message = $"Error: Booking ID {booking.ID} has more than 22 participants. Booking ID {booking.ID} has {booking.Participants} participants.";
+            throw new BookingValidationException(message);
+        }
+    }
+    
+    
+    // Method to print all bookings
+    public void PrintAllBookings()
+    {
+        Console.WriteLine($"Bookings for Gymhall {ID} - {Name}:");
+        foreach (var booking in bookings.Values)
+        {
+            Console.WriteLine($"Booking ID: {booking.ID}, Start: {booking.Start}, End: {booking.End}, Participants: {booking.Participants}");
+        }
     }
 
     
